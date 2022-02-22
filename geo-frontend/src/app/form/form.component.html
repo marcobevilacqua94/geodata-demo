@@ -1,30 +1,18 @@
-<form>
+<form class="map-form" [formGroup]="geoForm" (ngSubmit)="onFormSubmit()">
     <div class="form-group">
-      <label for="exampleFormControlInput1">Email address</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+      <label for="startDateInput">Start Date</label>
+      <input type="text" class="form-control" formControlName="startDate" id="startDateInput" placeholder="2020-10-01">
     </div>
+
     <div class="form-group">
-      <label for="exampleFormControlSelect1">Example select</label>
-      <select class="form-control" id="exampleFormControlSelect1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
+        <label for="endDateInput">End Date</label>
+        <input type="text" class="form-control" formControlName="endDate" id="endDateInput" placeholder="2020-11-01">
+      </div>
+    
     <div class="form-group">
-      <label for="exampleFormControlSelect2">Example multiple select</label>
-      <select multiple class="form-control" id="exampleFormControlSelect2">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
+      <label for="polygonInput">Polygon</label>
+      <textarea class="form-control" id="polygonInput" formControlName="polygon" rows="5" placeholder="(47.475724,25.121112),(47.08982922,24.99919863),(47.03627087,24.95687384),(46.99095227,24.9518935),(46.89756848,24.91079798),(46.85499646,24.87591831),(46.85411802,24.84412673)"></textarea>
     </div>
-    <div class="form-group">
-      <label for="exampleFormControlTextarea1">Example textarea</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
+    <p>Complete the form to enable button.</p>
+    <button class="btn btn-primary" type="submit" [disabled]="!geoForm.valid" >Submit</button>
   </form>

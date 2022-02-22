@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -6,10 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
+  
+  geoForm: FormGroup;
+  @Output() formOutput = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { 
+    this.createForm();
+  }
 
   ngOnInit(): void {
+    console.log(this.geoForm.valid);
+  }
+  
+  createForm() {
+    this.geoForm = this.fb.group({
+       startDate: ['', Validators.required],
+       endDate: ['', Validators.required ],
+       polygon: ['', Validators.required ]
+    });
+  }
+
+  onFormSubmit() {
+    console.log(this.geoForm.value);
+    this.formOutput.emit(this.geoForm.value);
   }
 
 }

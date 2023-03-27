@@ -1,6 +1,6 @@
 {
   "type": "fulltext-index",
-  "name": "geoLocIndex",
+  "name": "idxGeoLoc",
   "sourceType": "gocbcore",
   "sourceName": "elm",
   "planParams": {

@@ -1,10 +1,8 @@
 {
   "type": "fulltext-index",
-  "name": "demoIndex",
-  "uuid": "1d4239ba02781707",
+  "name": "geoLocIndex",
   "sourceType": "gocbcore",
   "sourceName": "elm",
-  "sourceUUID": "7064995a2cae6103308569ab8099f478",
   "planParams": {
     "maxPartitionsPerPIndex": 1024,
     "indexPartitions": 1

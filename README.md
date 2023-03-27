@@ -1,7 +1,7 @@
 # geodata-demo
 GeoData Demo Documentation
 
-
+This apps consents to specify points for a polygon on a map, with a date range, and see the database points which are inside the polygon and insertionDate in the range.
 
 
 GeoData Demo	1
@@ -29,22 +29,18 @@ Create your cluster with the following services: Data, Index, Query and Search
 
 Step2: Create your bucket:
 
-Create your bucket and name it “elm” and import the data.csv file
+Create your bucket and name it “elm” and import the data.csv file in scope IoT and collection ReadingHistory
 
-Step3: Import the CSV Data:
+Step : Create the eventing function
 
-Import the CSV data (data.csv) that you can find in the geo-infra folder
+Create the eventing function from the unify-records.json file in the geo-infra folder. It is useful to create loc object with coordinates.
 
-Step 4: Create the eventing function
-
-Create the eventing function from the unify-records.json file in the geo-infra folder
-
-Step 5 : Create the FTS index:
+Step 4 : Create the FTS index:
 
 Create your FTS index Via curl or from the UI. You can find the index configuration in the folder ( geo-infra)
 
-
-{
+curl -XPUT -H "Content-Type: application/json" -u Administrator:password http://<host>:8094/api/index/idxGeoLoc -d 
+'{
    "type": "fulltext-index",
    "name": "idxGeoLoc",
    "sourceType": "gocbcore",
@@ -116,7 +112,7 @@ Create your FTS index Via curl or from the UI. You can find the index configurat
      }
    },
    "sourceParams": {}
- }
+ }'
  
 
 
@@ -135,7 +131,6 @@ Frontend Environment:
 Step 1: Install Node Js
 
 Install NodeJs( https://nodejs.org/en/download/). Once you have it installed, write in your terminal node –-version to make sure that node js is well installed
-
 
 
 Step 2: Install Angular Js

@@ -40,10 +40,10 @@ public class CoordinateListRepository {
        
         try {
             SearchQuery polygon = SearchQuery.geoPolygon(points).field("loc");
-            SearchQuery dateRange = SearchQuery.dateRange().dateTimeParser("yyyy-mm-dd").start(startDate).dateTimeParser("yyyy-mm-dd").end(endDate).field("InsertionTime");
+            SearchQuery dateRange = SearchQuery.dateRange().dateTimeParser("yyyy-mm-dd").start(startDate).dateTimeParser("yyyy-mm-dd").end(endDate).field("insertionTime");
             ConjunctionQuery conjunctionQuery =
                     SearchQuery.conjuncts(polygon,dateRange);
-            final SearchResult result = cluster.searchQuery("elmIdx", conjunctionQuery, SearchOptions.searchOptions().
+            final SearchResult result = cluster.searchQuery("idxGeoLoc", conjunctionQuery, SearchOptions.searchOptions().
                     fields("loc"));
             System.out.println( " result == " + result.rows().size() ) ;
             for (SearchRow row : result.rows()) {

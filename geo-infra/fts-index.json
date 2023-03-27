@@ -1,1 +1,78 @@
-{ "type": "fulltext-index", "name": "idxGeoLoc", "sourceType": "gocbcore", "sourceName": "elm", "planParams": { "maxPartitionsPerPIndex": 1024, "indexPartitions": 1 }, "params": { "doc_config": { "docid_prefix_delim": "", "docid_regexp": "", "mode": "scope.collection.type_field", "type_field": "type" }, "mapping": { "analysis": {}, "default_analyzer": "standard", "default_datetime_parser": "dateTimeOptional", "default_field": "_all", "default_mapping": { "dynamic": false, "enabled": false }, "default_type": "_default", "docvalues_dynamic": false, "index_dynamic": false, "store_dynamic": false, "type_field": "_type", "types": { "IoT.ReadingHistory": { "dynamic": false, "enabled": true, "properties": { "insertionTime": { "dynamic": false, "enabled": true, "fields": [ { "docvalues": true, "include_in_all": true, "index": true, "name": "insertionTime", "type": "datetime" } ] }, "loc": { "dynamic": false, "enabled": true, "fields": [ { "docvalues": true, "include_in_all": true, "index": true, "name": "loc", "store": true, "type": "geopoint" } ] } } } } }, "store": { "indexType": "scorch", "segmentVersion": 15 } }, "sourceParams": {} }
+{
+  "type": "fulltext-index",
+  "name": "demoIndex",
+  "uuid": "1d4239ba02781707",
+  "sourceType": "gocbcore",
+  "sourceName": "elm",
+  "sourceUUID": "7064995a2cae6103308569ab8099f478",
+  "planParams": {
+    "maxPartitionsPerPIndex": 1024,
+    "indexPartitions": 1
+  },
+  "params": {
+    "doc_config": {
+      "docid_prefix_delim": "",
+      "docid_regexp": "",
+      "mode": "scope.collection.type_field",
+      "type_field": "type"
+    },
+    "mapping": {
+      "analysis": {},
+      "default_analyzer": "standard",
+      "default_datetime_parser": "dateTimeOptional",
+      "default_field": "_all",
+      "default_mapping": {
+        "dynamic": false,
+        "enabled": false
+      },
+      "default_type": "_default",
+      "docvalues_dynamic": false,
+      "index_dynamic": false,
+      "store_dynamic": false,
+      "type_field": "_type",
+      "types": {
+        "IoT.ReadingHistory": {
+          "dynamic": false,
+          "enabled": true,
+          "properties": {
+            "insertionTime": {
+              "dynamic": false,
+              "enabled": true,
+              "fields": [
+                {
+                  "date_format": "dateTimeOptional",
+                  "docvalues": true,
+                  "include_in_all": true,
+                  "index": true,
+                  "name": "insertionTime",
+                  "store": true,
+                  "type": "datetime"
+                }
+              ]
+            },
+            "loc": {
+              "dynamic": false,
+              "enabled": true,
+              "fields": [
+                {
+                  "docvalues": true,
+                  "include_in_all": true,
+                  "index": true,
+                  "name": "loc",
+                  "store": true,
+                  "type": "geopoint"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "store": {
+      "indexType": "scorch",
+      "segmentVersion": 15,
+      "spatialPlugin": "s2"
+    }
+  },
+  "sourceParams": {}
+}

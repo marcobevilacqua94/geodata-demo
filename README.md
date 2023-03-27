@@ -120,7 +120,7 @@ Make sure to install an updated version of JDK & Maven in your local machine
 Step 2: download maven dependencies
 If you are using an IDE ex: Eclipse. You can click on the project -> update the project to download all the dependencies related to this project (pom.xml)
 
-Step 3: Put your host, username and password of couchbase in applicaiton.properties
+Step 3: Put your host, username and password of couchbase in application.properties
 
 Step 4: Run your backend project
 

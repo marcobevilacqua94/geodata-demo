@@ -35,7 +35,7 @@ Step 3 : Create the FTS index:
 
 Create your FTS index Via curl or from the UI. You can find the index configuration in the folder (geo-infra)
 You can do it via quick index by adding loc as geopoint field and insertionTime as datetime. Select all the check options for both. Call it idxGeoLoc.
-curl -XPUT -H "Content-Type: application/json" -u Administrator:password http://<host>:8094/api/index/idxGeoLoc -d 
+curl -XPUT -H "Content-Type: application/json" -u <user>:<password> http://<host>:8094/api/index/idxGeoLoc -d 
 '{
    "type": "fulltext-index",
    "name": "idxGeoLoc",

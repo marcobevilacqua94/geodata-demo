@@ -29,7 +29,7 @@ Create your cluster with the following services: Data, Index, Query and Search
 
 Step2: Create your bucket:
 
-Create your bucket and name it “elm” and import the data.json file in scope IoT and collection ReadingHistory
+Create your bucket and name it “elm” and import the data.json file in scope IoT and collection ReadingHistory. Select readingId as document id field.
 
 Step 3 : Create the FTS index:
 

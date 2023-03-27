@@ -29,16 +29,12 @@ Create your cluster with the following services: Data, Index, Query and Search
 
 Step2: Create your bucket:
 
-Create your bucket and name it “elm” and import the data.csv file in scope IoT and collection ReadingHistory
+Create your bucket and name it “elm” and import the data.json file in scope IoT and collection ReadingHistory
 
-Step : Create the eventing function
+Step 3 : Create the FTS index:
 
-Create the eventing function from the unify-records.json file in the geo-infra folder. It is useful to create loc object with coordinates.
-
-Step 4 : Create the FTS index:
-
-Create your FTS index Via curl or from the UI. You can find the index configuration in the folder ( geo-infra)
-
+Create your FTS index Via curl or from the UI. You can find the index configuration in the folder (geo-infra)
+You can do it via quick index by adding loc as geopoint field and insertionTime as datetime. Select all the check options for both. Call it idxGeoLoc.
 curl -XPUT -H "Content-Type: application/json" -u Administrator:password http://<host>:8094/api/index/idxGeoLoc -d 
 '{
    "type": "fulltext-index",
@@ -151,7 +147,7 @@ You can run the application using the following command: ng serve The frontend i
 
 
 
-Go to http://localhost:4200 You should have a similar interface
+Go to http://localhost:4200 You should have the interface
 
 
 

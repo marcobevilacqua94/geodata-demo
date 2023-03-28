@@ -7,23 +7,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  
+
   geoForm: FormGroup;
   @Output() formOutput = new EventEmitter<any>();
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder) {
     this.createForm();
   }
 
   ngOnInit(): void {
     console.log(this.geoForm.valid);
   }
-  
+
   createForm() {
     this.geoForm = this.fb.group({
-       startDate: ['', Validators.required],
-       endDate: ['', Validators.required ],
-       polygon: ['', Validators.required ]
+       name: [''],
+       polygon: ['']
     });
   }
 

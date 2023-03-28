@@ -35,23 +35,27 @@ public class DemoController {
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(method = RequestMethod.GET, value = "/coordinates")
     public List<CBCoordinate> controllerMethod(@RequestParam Map<String, String> customQuery) {
-        String startDate = customQuery.get("startDate");
-        String endDate = customQuery.get("endDate");
+        String name = customQuery.get("name");
         String pointsString = customQuery.get("points");
-        System.out.println("customQuery = startDate " + startDate);
-        System.out.println("customQuery = endDate " + endDate);
-        
-        //** Convert the input to coordinate list
-        pointsString = pointsString.substring(1, pointsString.length() - 1);
-        List<String> coordinates = new ArrayList<String>(Arrays.asList(pointsString.split(Pattern.quote("),("))));
-        
-        //List polygon  = new List() {};
+        System.out.println("customQuery = name " + name);
         List<Coordinate> points = new ArrayList<Coordinate>();
-        coordinates.forEach((c) -> {
+        try {
+            //** Convert the input to coordinate list
+            pointsString = pointsString.substring(1, pointsString.length() - 1);
+            List<String> coordinates = new ArrayList<String>(Arrays.asList(pointsString.split(Pattern.quote("),("))));
 
-            points.add(Coordinate.ofLonLat(Double.parseDouble(c.split(",")[0]),Double.parseDouble(c.split(",")[1])));
-        });
-        return repo.getFTSData(startDate,endDate, points);
+            //List polygon  = new List() {};
+
+            coordinates.forEach((c) -> {
+
+                points.add(Coordinate.ofLonLat(Double.parseDouble(c.split(",")[0]), Double.parseDouble(c.split(",")[1])));
+            });
+        } catch (StringIndexOutOfBoundsException e){
+            System.out.println("prob they did not insert points");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return repo.getFTSData(name, points);
     }
 
 

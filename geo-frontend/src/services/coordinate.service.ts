@@ -8,9 +8,9 @@ export class CoordinateService {
 
     }
 
-    getCoordinates(startDate:String, endDate:String, polygon: String): Observable<Coordinate[]>{
+    getCoordinates(name:String, polygon: String): Observable<Coordinate[]>{
         const url = "http://localhost:8080";
-        return this.httpclient.get<Coordinate[]>(url +  "/coordinates?startDate="+startDate+"&endDate="+endDate+"&points="+polygon);
+        return this.httpclient.get<Coordinate[]>(url +  "/coordinates?name="+name+"&points="+polygon);
     }
 }
 

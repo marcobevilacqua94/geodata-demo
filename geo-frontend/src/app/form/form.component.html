@@ -1,14 +1,9 @@
 <form class="map-form" [formGroup]="geoForm" (ngSubmit)="onFormSubmit()">
     <div class="form-group">
-      <label for="startDateInput">Start Date</label>
-      <input type="text" class="form-control" formControlName="startDate" id="startDateInput" placeholder="2020-10-01">
+      <label for="nameInput">Word To Search In Italian Comuni Names</label>
+      <input type="text" class="form-control" formControlName="name" id="nameInput" placeholder="milano">
     </div>
 
-    <div class="form-group">
-        <label for="endDateInput">End Date</label>
-        <input type="text" class="form-control" formControlName="endDate" id="endDateInput" placeholder="2020-11-01">
-      </div>
-    
     <div class="form-group">
       <label for="polygonInput">Polygon</label>
       <textarea class="form-control" id="polygonInput" formControlName="polygon" rows="5" placeholder="(47.475724,25.121112),(47.08982922,24.99919863),(47.03627087,24.95687384),(46.99095227,24.9518935),(46.89756848,24.91079798),(46.85499646,24.87591831),(46.85411802,24.84412673)"></textarea>

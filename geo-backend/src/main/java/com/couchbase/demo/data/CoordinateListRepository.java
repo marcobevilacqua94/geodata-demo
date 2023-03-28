@@ -2,6 +2,7 @@ package com.couchbase.demo.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.stereotype.Repository;
 
@@ -33,18 +34,24 @@ public class CoordinateListRepository {
     }
 
 
-    public List<CBCoordinate> getFTSData(String startDate , String endDate, List<Coordinate> points) {
+    public List<CBCoordinate> getFTSData(String nameString, List<Coordinate> points) {
         // TODO-02: Implement the functionality to get a Document and return as string
         //          Be sure to handle exceptions.
         List<CBCoordinate> jsonGeolist = new ArrayList<CBCoordinate>();
        
         try {
-            SearchQuery polygon = SearchQuery.geoPolygon(points).field("loc");
-            SearchQuery dateRange = SearchQuery.dateRange().dateTimeParser("yyyy-mm-dd").start(startDate).dateTimeParser("yyyy-mm-dd").end(endDate).field("insertionTime");
-            ConjunctionQuery conjunctionQuery =
-                    SearchQuery.conjuncts(polygon,dateRange);
-            final SearchResult result = cluster.searchQuery("idxGeoLoc", conjunctionQuery, SearchOptions.searchOptions().
-                    fields("loc"));
+            SearchQuery name = null;
+            if(nameString == null || nameString.trim().length() == 0){
+                name = SearchQuery.matchAll();
+            } else {
+                name = SearchQuery.match(nameString).field("comune");
+            }
+            final SearchResult result = !points.isEmpty() ? cluster.searchQuery("comuniIndex",
+                    SearchQuery.conjuncts(SearchQuery.geoPolygon(points).field("loc"),name), SearchOptions.searchOptions().limit(8000).
+                    fields("comune","loc"))
+                    :
+                    cluster.searchQuery("comuniIndex", name, SearchOptions.searchOptions().limit(8000).
+                    fields("comune","loc"));
             System.out.println( " result == " + result.rows().size() ) ;
             for (SearchRow row : result.rows()) {
             	CBCoordinate cb = new CBCoordinate(row.fieldsAs(JsonObject.class));

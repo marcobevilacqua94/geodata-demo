@@ -1,20 +1,14 @@
 # geodata-demo
 GeoData Demo Documentation
+COMUNI ITALIANI VERSION
 
 This apps consents to specify points for a polygon on a map, with a date range, and see the database points which are inside the polygon and insertionDate in the range.
 
 
-GeoData Demo	1
-Project Repository:	1
-Infrastructure:	1
-Backend Environment:	4
-Frontend Environment:	4
-
-
 Project Repository:
-Clone the project geodata demo from : https://github.com/marcobevilacqua94/geodata-demo 
-
+Clone the project geodata demo from : https://github.com/marcobevilacqua94/geodata-demo
 git clone https://github.com/marcobevilacqua94/geodata-demo.git
+SELECT comuni BRANCH
 
 The repository contains 3 folders:
 geo-backend
@@ -29,89 +23,14 @@ Create your cluster with the following services: Data, Index, Query and Search
 
 Step2: Create your bucket:
 
-Create your bucket and name it “elm” and import the data.json file in scope IoT and collection ReadingHistory. Select readingId as document id field.
+Create your bucket and name it “comuni” and import the comuni.json file in scope comuni and collection comuni. Select istat as document id field.
 
 Step 3 : Create the FTS index:
 
 Create your FTS index Via curl or from the UI. You can find the index configuration in the folder (geo-infra)
-You can do it via quick index by adding loc as geopoint field and insertionTime as datetime. Select all the check options for both. Call it idxGeoLoc.
-curl -XPUT -H "Content-Type: application/json" -u Administrator:password http://<host>:8094/api/index/idxGeoLoc -d 
-'{
-   "type": "fulltext-index",
-   "name": "idxGeoLoc",
-   "sourceType": "gocbcore",
-   "sourceName": "elm",
-   "planParams": {
-     "maxPartitionsPerPIndex": 1024,
-     "indexPartitions": 1
-   },
-   "params": {
-     "doc_config": {
-       "docid_prefix_delim": "",
-       "docid_regexp": "",
-       "mode": "scope.collection.type_field",
-       "type_field": "type"
-     },
-     "mapping": {
-       "analysis": {},
-       "default_analyzer": "standard",
-       "default_datetime_parser": "dateTimeOptional",
-       "default_field": "_all",
-       "default_mapping": {
-         "dynamic": false,
-         "enabled": false
-       },
-       "default_type": "_default",
-       "docvalues_dynamic": false,
-       "index_dynamic": false,
-       "store_dynamic": false,
-       "type_field": "_type",
-       "types": {
-         "IoT.ReadingHistory": {
-           "dynamic": false,
-           "enabled": true,
-           "properties": {
-             "insertionTime": {
-               "dynamic": false,
-               "enabled": true,
-               "fields": [
-                 {
-                   "docvalues": true,
-                   "include_in_all": true,
-                   "index": true,
-                   "name": "insertionTime",
-                   "type": "datetime"
-                 }
-               ]
-             },
-             "loc": {
-               "dynamic": false,
-               "enabled": true,
-               "fields": [
-                 {
-                   "docvalues": true,
-                   "include_in_all": true,
-                   "index": true,
-                   "name": "loc",
-                   "store": true,
-                   "type": "geopoint"
-                 }
-               ]
-             }
-           }
-         }
-       }
-     },
-     "store": {
-       "indexType": "scorch",
-       "segmentVersion": 15
-     }
-   },
-   "sourceParams": {}
- }'
- 
-
-
+You can do it via quick index by adding loc as geopoint field. Select all the check options. Call it comuniIndex.
+curl -XPUT -H "Content-Type: application/json" -u Administrator:password http://<host>:8094/api/index/comuniIndex -d 
+'<fts-index.json>'
 
 Backend Environment:
 Step 1: Install JDK & Maven

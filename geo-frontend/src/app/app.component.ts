@@ -8,14 +8,14 @@ import * as Leaflet from 'leaflet';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  
+
   title = 'geo-frontend';
   private map: Leaflet.Map;
 
   coordinates: Coordinate[]= [];
   points: Leaflet.LatLng[] = [];
 
-  constructor(private _coordinateService: CoordinateService) { 
+  constructor(private _coordinateService: CoordinateService) {
   }
 
 
@@ -30,16 +30,18 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.map.remove();
     this.initMap();
     this.points = [];
-    let tempPoints = input.polygon.substring(1, input.polygon.length-1).split("),(");
-    tempPoints.forEach((element:string) => {
-      this.points.push(new Leaflet.LatLng(Number(element.split(",")[1]), Number(element.split(",")[0])));
-    });
-    this.drawPolygon(this.points);
-    this._coordinateService.getCoordinates(input.startDate, input.endDate, input.polygon).subscribe((data) => {
+    try{
+      let tempPoints = input.polygon.substring(1, input.polygon.length-1).split("),(");
+      tempPoints.forEach((element:string) => {
+        this.points.push(new Leaflet.LatLng(Number(element.split(",")[1]), Number(element.split(",")[0])));
+      });
+      this.drawPolygon(this.points);
+    } catch  (error) {}
+    this._coordinateService.getCoordinates(input.name, input.polygon).subscribe((data) => {
       this.drawCircles(data);
       this.coordinates = data
     }
-        
+
   );}
 
   ngAfterViewInit(): void {
@@ -48,7 +50,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   private initMap(): void {
     this.map = Leaflet.map('map', {
-      center: new Leaflet.LatLng(23.8859, 45.0792, 14),
+      center: new Leaflet.LatLng(41.9028, 12.4964, 14),
       zoom: 6,
       layers: getLayers(),
     });

@@ -1,76 +1,79 @@
 {
-  "type": "fulltext-index",
-  "name": "idxGeoLoc",
-  "sourceType": "gocbcore",
-  "sourceName": "elm",
-  "planParams": {
-    "maxPartitionsPerPIndex": 1024,
-    "indexPartitions": 1
+ "name": "comuniIndex",
+ "type": "fulltext-index",
+ "params": {
+  "doc_config": {
+   "docid_prefix_delim": "",
+   "docid_regexp": "",
+   "mode": "scope.collection.type_field",
+   "type_field": "type"
   },
-  "params": {
-    "doc_config": {
-      "docid_prefix_delim": "",
-      "docid_regexp": "",
-      "mode": "scope.collection.type_field",
-      "type_field": "type"
-    },
-    "mapping": {
-      "analysis": {},
-      "default_analyzer": "standard",
-      "default_datetime_parser": "dateTimeOptional",
-      "default_field": "_all",
-      "default_mapping": {
-        "dynamic": false,
-        "enabled": false
-      },
-      "default_type": "_default",
-      "docvalues_dynamic": false,
-      "index_dynamic": false,
-      "store_dynamic": false,
-      "type_field": "_type",
-      "types": {
-        "IoT.ReadingHistory": {
-          "dynamic": false,
-          "enabled": true,
-          "properties": {
-            "insertionTime": {
-              "dynamic": false,
-              "enabled": true,
-              "fields": [
-                {
-                  "date_format": "dateTimeOptional",
-                  "docvalues": true,
-                  "include_in_all": true,
-                  "index": true,
-                  "name": "insertionTime",
-                  "store": true,
-                  "type": "datetime"
-                }
-              ]
-            },
-            "loc": {
-              "dynamic": false,
-              "enabled": true,
-              "fields": [
-                {
-                  "docvalues": true,
-                  "include_in_all": true,
-                  "index": true,
-                  "name": "loc",
-                  "store": true,
-                  "type": "geopoint"
-                }
-              ]
-            }
-          }
+  "mapping": {
+   "default_analyzer": "standard",
+   "default_datetime_parser": "dateTimeOptional",
+   "default_field": "_all",
+   "default_mapping": {
+    "dynamic": false,
+    "enabled": false
+   },
+   "default_type": "_default",
+   "docvalues_dynamic": false,
+   "index_dynamic": false,
+   "store_dynamic": false,
+   "type_field": "_type",
+   "types": {
+    "comuni.comuni": {
+     "dynamic": false,
+     "enabled": true,
+     "properties": {
+      "comune": {
+       "enabled": true,
+       "dynamic": false,
+       "fields": [
+        {
+         "analyzer": "it",
+         "docvalues": true,
+         "include_in_all": true,
+         "include_term_vectors": true,
+         "index": true,
+         "name": "comune",
+         "store": true,
+         "type": "text"
         }
+       ]
+      },
+      "loc": {
+       "enabled": true,
+       "dynamic": false,
+       "fields": [
+        {
+         "docvalues": true,
+         "include_in_all": true,
+         "index": true,
+         "name": "loc",
+         "store": true,
+         "type": "geopoint"
+        }
+       ]
       }
-    },
-    "store": {
-      "indexType": "scorch",
-      "segmentVersion": 15,
-      "spatialPlugin": "s2"
+     }
     }
+   }
   },
-  "sourceParams": {}
+  "store": {
+   "indexType": "scorch",
+   "segmentVersion": 15,
+   "spatialPlugin": "s2"
+  }
+ },
+ "sourceType": "gocbcore",
+ "sourceName": "comuni",
+ "sourceUUID": "8b7a5b29fe6279c5917bdb3fb66b859d",
+ "sourceParams": {},
+ "planParams": {
+  "maxPartitionsPerPIndex": 1024,
+  "indexPartitions": 1,
+  "numReplicas": 0
+ },
+ "uuid": "19e81233df330526"
 }

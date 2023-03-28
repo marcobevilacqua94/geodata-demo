@@ -8,7 +8,7 @@ This apps consents to specify points for a polygon on a map, with a date range, 
 Project Repository:
 Clone the project geodata demo from : https://github.com/marcobevilacqua94/geodata-demo
 git clone https://github.com/marcobevilacqua94/geodata-demo.git
-SELECT comuni BRANCH
+SELECT comuni-italiani BRANCH
 
 The repository contains 3 folders:
 geo-backend

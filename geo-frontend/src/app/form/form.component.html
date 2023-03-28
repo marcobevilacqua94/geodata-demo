@@ -6,7 +6,7 @@
 
     <div class="form-group">
       <label for="polygonInput">Polygon</label>
-      <textarea class="form-control" id="polygonInput" formControlName="polygon" rows="5" placeholder="(15,41),(13,38),(16,41)"></textarea>
+      <input type="text" class="form-control" id="polygonInput" formControlName="polygon" placeholder="(15,41),(13,38),(16,41)">
     </div>
     <p>Ex of coordinates (15,41),(13,38),(16,41)</p>
     <button class="btn btn-primary" type="submit" [disabled]="!geoForm.valid" >Submit</button>

@@ -43,7 +43,12 @@ public class CoordinateListRepository {
             SearchQuery name = null;
             if(nameString == null || nameString.trim().length() == 0){
                 return jsonGeolist;
-            } else {
+            } else if(nameString.equals("*all*"))
+            {
+                name = SearchQuery.matchAll();
+            }
+            else
+            {
                 name = SearchQuery.disjuncts(SearchQuery.match(nameString).field("comune"), SearchQuery.prefix(nameString).field("comune"));
             }
             final SearchResult result = !points.isEmpty() ? cluster.searchQuery("comuniIndex",

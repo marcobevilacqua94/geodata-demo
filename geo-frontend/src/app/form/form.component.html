@@ -1,7 +1,7 @@
 <form class="map-form" [formGroup]="geoForm" (ngSubmit)="onFormSubmit()">
     <h5>Specify a word and a polygon to search</h5>
     <div class="form-group">
-      <label for="nameInput">Get Comuni starting with or matching this text in the area you select</label>
+      <label for="nameInput">Get Comuni starting with or matching this text in the area you select.<br> Search for *all* to match all the Comuni in the polygon.</label>
       <input type="text" class="form-control" formControlName="name" id="nameInput" placeholder="milano">
     </div>
 

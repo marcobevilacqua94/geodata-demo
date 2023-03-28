@@ -41,6 +41,7 @@ public class DemoController {
         List<Coordinate> points = new ArrayList<Coordinate>();
         try {
             //** Convert the input to coordinate list
+            pointsString = pointsString.replaceAll("(?m)^[ \t]*\r?\n", "").replaceAll(" ", "");
             pointsString = pointsString.substring(1, pointsString.length() - 1);
             List<String> coordinates = new ArrayList<String>(Arrays.asList(pointsString.split(Pattern.quote("),("))));
 

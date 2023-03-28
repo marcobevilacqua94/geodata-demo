@@ -6,8 +6,8 @@
 
     <div class="form-group">
       <label for="polygonInput">Polygon</label>
-      <textarea class="form-control" id="polygonInput" formControlName="polygon" rows="5" placeholder="(47.475724,25.121112),(47.08982922,24.99919863),(47.03627087,24.95687384),(46.99095227,24.9518935),(46.89756848,24.91079798),(46.85499646,24.87591831),(46.85411802,24.84412673)"></textarea>
+      <textarea class="form-control" id="polygonInput" formControlName="polygon" rows="5" placeholder="(15,41),(13,38),(16,41)"></textarea>
     </div>
-    <p>Complete the form to enable button.</p>
+    <p>Ex of coordinates (15,41),(13,38),(16,41)</p>
     <button class="btn btn-primary" type="submit" [disabled]="!geoForm.valid" >Submit</button>
   </form>

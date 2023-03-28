@@ -2,8 +2,7 @@
 GeoData Demo Documentation
 COMUNI ITALIANI VERSION
 
-This app consents to specify points for a polygon on a map, with a date range, and see the database points which are inside the polygon and insertionDate in the range.
-
+This app consents to specify a polygon on a map and to search for a word to find italian Comuni.
 
 Project Repository:
 Clone the project geodata demo from : https://github.com/marcobevilacqua94/geodata-demo

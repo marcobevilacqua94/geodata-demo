@@ -41,15 +41,14 @@ public class DemoController {
         List<Coordinate> points = new ArrayList<Coordinate>();
         try {
             //** Convert the input to coordinate list
-            pointsString = pointsString.replaceAll(" ", "");
+            pointsString = pointsString.replaceAll(" ", "").replaceAll("[^0-9(),.]","");
             pointsString = pointsString.substring(1, pointsString.length() - 1);
             List<String> coordinates = new ArrayList<String>(Arrays.asList(pointsString.split(Pattern.quote("),("))));
 
             //List polygon  = new List() {};
 
             coordinates.forEach((c) -> {
-
-                points.add(Coordinate.ofLonLat(Double.parseDouble(c.split(",")[0]), Double.parseDouble(c.split(",")[1])));
+                points.add(Coordinate.ofLonLat(Double.parseDouble(c.split(",")[1]), Double.parseDouble(c.split(",")[0])));
             });
         } catch (StringIndexOutOfBoundsException e){
             System.out.println("prob they did not insert points");

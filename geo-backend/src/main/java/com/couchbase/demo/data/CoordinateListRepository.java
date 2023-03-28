@@ -42,7 +42,7 @@ public class CoordinateListRepository {
         try {
             SearchQuery name = null;
             if(nameString == null || nameString.trim().length() == 0){
-                name = SearchQuery.matchAll();
+                return jsonGeolist;
             } else {
                 name = SearchQuery.match(nameString).field("comune");
             }

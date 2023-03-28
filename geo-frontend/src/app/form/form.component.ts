@@ -21,7 +21,7 @@ export class FormComponent implements OnInit {
 
   createForm() {
     this.geoForm = this.fb.group({
-       name: [''],
+       name: ['', Validators.required],
        polygon: ['']
     });
   }

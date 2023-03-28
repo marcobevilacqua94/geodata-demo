@@ -50,7 +50,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     } catch  (error) {
       if(this.lastPolyRaw != ""){
         this._coordinateService.getCoordinates(input.name, this.lastPolyRaw).subscribe((data) => {
-                        this.lastPolyRaw = input.polygon;
                         this.drawCircles(data);
                         this.coordinates = data;
                       });
@@ -99,15 +98,6 @@ export class AppComponent implements OnInit, AfterViewInit {
           toolbar: {
             // #TODO: this should be reorganized where actions are nested in actions
             // ex: actions.undo  or actions.cancel
-//             actions: {
-//
-//                       },
-//                       finish: {
-//
-//                       },
-//                       undo: {
-//
-//                       },
             buttons: {
               polyline: '- your text-',
               polygon: 'Poly',

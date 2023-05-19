@@ -27,7 +27,7 @@ Create your bucket and name it “comuni” and import the comuni.json file in s
 Step 3 : Create the FTS index:
 
 Create your FTS index Via curl or from the UI. You can find the index configuration in the folder (geo-infra)
-You can do it via quick index by adding loc as geopoint field and comune as a text field. Select all the check options. Call it comuniIndex.
+You can do it via quick index by adding loc as geopoint field and comune as a text field. Select all the check options, apart from "index as id" for the comune. Call it comuniIndex.
 curl -XPUT -H "Content-Type: application/json" -u Administrator:password http://<host>:8094/api/index/comuniIndex -d 
 '<fts-index.json>'
 
@@ -38,7 +38,7 @@ Make sure to install an updated version of JDK & Maven in your local machine
 Step 2: download maven dependencies
 If you are using an IDE ex: Eclipse. You can click on the project -> update the project to download all the dependencies related to this project (pom.xml)
 
-Step 3: Put your host, username and password of couchbase in applicaiton.properties
+Step 3: Put your host, username and password of couchbase in application.properties
 
 Step 4: Run your backend project
 

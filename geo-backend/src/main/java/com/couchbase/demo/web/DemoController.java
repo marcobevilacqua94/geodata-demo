@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import com.couchbase.demo.domain.CBComuneCoordinate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.couchbase.client.java.util.Coordinate;
 import com.couchbase.demo.data.CoordinateListRepository;
-import com.couchbase.demo.domain.CBCoordinate;
 
 @RestController
 public class DemoController {
@@ -34,7 +34,7 @@ public class DemoController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(method = RequestMethod.GET, value = "/coordinates")
-    public List<CBCoordinate> controllerMethod(@RequestParam Map<String, String> customQuery) {
+    public List<CBComuneCoordinate> controllerMethod(@RequestParam Map<String, String> customQuery) {
         String name = customQuery.get("name");
         String pointsString = customQuery.get("points");
         System.out.println("customQuery = name " + name);

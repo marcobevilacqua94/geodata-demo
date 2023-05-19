@@ -3,7 +3,10 @@
     <div class="form-group">
       <label for="nameInput">Get Comuni starting with or matching this text in the area you select.<br> Search for *all* to match all the Comuni in the polygon.</label>
       <input type="text" class="form-control" formControlName="name" id="nameInput" placeholder="milano">
-    </div>
 
+    </div>
     <button class="btn btn-primary" type="submit" [disabled]="!geoForm.valid" >Search</button>
+    <br><br>
+    <h5>Result:</h5>
+    <p id="result"></p>
   </form>

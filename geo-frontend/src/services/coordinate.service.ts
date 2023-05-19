@@ -16,4 +16,5 @@ export class CoordinateService {
 
 export interface Coordinate {
     loc: number[]
+    name: String
 }

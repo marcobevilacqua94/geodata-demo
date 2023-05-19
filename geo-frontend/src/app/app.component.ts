@@ -16,6 +16,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   points: L.LatLng[] = [];
   circles: L.CircleMarker[]= [];
   polygon: L.Polygon;
+  comuniList: String[];
   lastPolyRaw = "";
   titleControl = L.Control;
   constructor(private _coordinateService: CoordinateService) {
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   getCoordinate(input: any) {
     this.points = [];
     this.lastName = input.name;
-    this.deleteCircles();
+    this.deleteCommons();
     try{
       let tempPoints = input.polygon.substring(1, input.polygon.length-1).split("),(");
       tempPoints.forEach((element:string) => {
@@ -43,14 +44,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 
       this._coordinateService.getCoordinates(input.name, input.polygon).subscribe((data) => {
         this.lastPolyRaw = input.polygon;
-        this.drawCircles(data);
+        this.setCommons(data);
         this.coordinates = data;
         this.titleControl.setContent("<h2 style='background: white'>Searching for:  " + input.name + "</h2>");
       })
     } catch  (error) {
       if(this.lastPolyRaw != ""){
         this._coordinateService.getCoordinates(input.name, this.lastPolyRaw).subscribe((data) => {
-                        this.drawCircles(data);
+                        this.setCommons(data);
                         this.coordinates = data;
                       });
       }
@@ -63,7 +64,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   getCoordinateDraw(input: any) {
       let center = this.map.getCenter();
       let zoom = this.map.getZoom();
-      this.deleteCircles();
+      this.deleteCommons();
       if(this.polygon != null){
         this.deletePolygon();
         }
@@ -73,7 +74,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       } catch  (error) {}
       this._coordinateService.getCoordinates(this.lastName, input).subscribe((data) => {
         this.lastPolyRaw = input;
-        this.drawCircles(data);
+        this.setCommons(data);
         this.coordinates = data;
       });
 
@@ -242,29 +243,49 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   }
 
-  drawCircles(coords:Coordinate[]): void {
-    for (const c of coords) {
-      const circle = L.circleMarker([c.loc[1],c.loc[0]], {color: 'red'});
-      circle.addTo(this.map);
+  setCommons(commons:Coordinate[]): void {
+    for (const c of commons) {
+      const circle = L.circleMarker([c.loc[1],c.loc[0]], {color: 'red', title: c.name});
+      circle.addTo(this.map).bindPopup(c.name + " " + c.loc[0].toFixed(6) + "° N, " + c.loc[1].toFixed(6)+ "° E", {closeButton: false});
+      circle.on('mouseover',function() {
+        circle.openPopup();
+      });
+      circle.on('mouseout',function() {
+        circle.closePopup();
+      });
       this.circles.push(circle);
+      this.comuniList.push(c.name);
     }
+    this.comuniList.sort();
+    document.getElementById("result")!.textContent = this.comuniList.join(", ");
   }
 
-  deleteCircles(){
+  deleteCommons(){
     for(let i=0;i<this.circles.length;i++){
       this.map.removeLayer(this.circles[i]);
     }
     this.circles = [];
+    this.comuniList = [];
+    document.getElementById("result")!.textContent = "";
   }
 
   drawPolygon(points: L.LatLng[]): void{
-    this.polygon = L.polygon(points, {color: 'blue'});
+    const polygon = L.polygon(points, {color: 'blue'});
+    this.polygon = polygon;
+    this.polygon.bindPopup(this.polygon.getLatLngs().toString().replace(/[A-Za-z]*/g, "").replace(/, /g, "° N, ").replace(/\)/g,"° E)"), {closeButton: false});
+    this.polygon.on('mouseclick',function() {
+      polygon.openPopup();
+    });
+    this.polygon.on('mouseout',function() {
+      polygon.closePopup();
+    });
     this.polygon.addTo(this.map);
   }
 
   deletePolygon(){
     this.map.removeLayer(this.polygon);
   }
+
 
 }
 export const getLayers = (): L.Layer[] => {

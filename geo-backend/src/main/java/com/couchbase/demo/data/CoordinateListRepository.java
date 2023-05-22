@@ -38,7 +38,7 @@ public class CoordinateListRepository {
         List<CBComuneCoordinate> jsonGeoList = new ArrayList<>();
        
         try {
-            SearchQuery name = null;
+            SearchQuery name;
             if(nameString == null || nameString.trim().length() == 0){
                 return jsonGeoList;
             } else if(nameString.equals("*all*"))
@@ -49,9 +49,17 @@ public class CoordinateListRepository {
             {
                 name = SearchQuery.disjuncts(SearchQuery.match(nameString).field("comune"), SearchQuery.prefix(nameString).field("comune"));
             }
-            final SearchResult result = !points.isEmpty() ? cluster.searchQuery("comuniIndex",
-                    SearchQuery.conjuncts(SearchQuery.geoPolygon(points).field("loc"),name), SearchOptions.searchOptions().limit(8000).
+            final SearchResult result = !points.isEmpty() ?
+
+                    cluster.searchQuery("comuniIndex",
+                    SearchQuery.conjuncts(
+                            SearchQuery.geoPolygon(points).field("loc"),
+                            name
+                    ),
+                            SearchOptions.searchOptions().limit(8000).
                     fields("comune","loc"))
+
+
                     :
                     cluster.searchQuery("comuniIndex", name, SearchOptions.searchOptions().limit(8000).
                     fields("comune","loc"));

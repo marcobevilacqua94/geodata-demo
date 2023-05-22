@@ -47,7 +47,8 @@ public class CoordinateListRepository {
             }
             else
             {
-                name = SearchQuery.disjuncts(SearchQuery.match(nameString).field("comune"), SearchQuery.prefix(nameString).field("comune"));
+                nameString = nameString.toLowerCase();
+                name = SearchQuery.disjuncts(SearchQuery.match(nameString).field("comune"), SearchQuery.prefix(nameString).field("comune"), SearchQuery.queryString(nameString));
             }
             final SearchResult result = !points.isEmpty() ?
 
